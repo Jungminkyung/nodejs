@@ -1,0 +1,12 @@
+노드를 80 번 포트로 사용하기
+
+참고 : https://serverfault.com/questions/722270/configuring-centos-6-iptables-to-use-port-80-for-nodejs-app-running-on-port-3000
+
+sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
+sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+sudo iptables -I INPUT 1 -p tcp --dport 3000 -j ACCEPT
+
+sudo iptables-save > /etc/sysconfig/iptables
+
+
+
